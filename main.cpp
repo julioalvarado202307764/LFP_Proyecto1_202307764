@@ -105,10 +105,111 @@ public:
                         return {lexema, TokenType::NUMERO, tokenLinea, tokenColumna};
                     }
                     break;
+                // --- RUTA DE LA FECHA (Continuación) ---
+                case 4: // S4: Tercer dígito de AAAA
+                    if (std::isdigit(c)) {
+                        estado = 5; // S5: Cuarto dígito (año completo)
+                        lexema += c;
+                    } else {
+                        // Si se corta aquí, es un número válido (ej. una habitación o edad larga)
+                        return {lexema, TokenType::NUMERO, tokenLinea, tokenColumna};
+                    }
+                    break;
 
-                // TODO: Implementar S4 a S12 según tu tabla para completar FECHA y HORA
-                
-                // ...
+                case 5: // S5: Año completo (AAAA), esperamos obligatoriamente el primer guion '-'
+                    if (c == '-') {
+                        estado = 6; // S6: Primer guion leído
+                        lexema += c;
+                    } else {
+                        // Si no viene guion, retorna como NUMERO (el analizador no consumió el carácter actual)
+                        return {lexema, TokenType::NUMERO, tokenLinea, tokenColumna};
+                    }
+                    break;
+
+                case 6: // S6: Esperamos primer dígito del mes
+                    if (std::isdigit(c)) {
+                        estado = 8; // S8: Primer dígito del mes leído
+                        lexema += c;
+                    } else {
+                        // Error: "AAAA-" no es un token válido
+                        return {lexema, TokenType::ERROR_LEXICO, tokenLinea, tokenColumna}; 
+                    }
+                    break;
+
+                case 8: // S8: Esperamos segundo dígito del mes
+                    if (std::isdigit(c)) {
+                        estado = 10; // S10: Mes completo (MM)
+                        lexema += c;
+                    } else {
+                        return {lexema, TokenType::ERROR_LEXICO, tokenLinea, tokenColumna};
+                    }
+                    break;
+
+                case 10: // S10: Esperamos el segundo guion '-'
+                    if (c == '-') {
+                        estado = 11; // S11: Segundo guion leído
+                        lexema += c;
+                    } else {
+                        return {lexema, TokenType::ERROR_LEXICO, tokenLinea, tokenColumna};
+                    }
+                    break;
+
+                case 11: // S11: Esperamos primer dígito del día
+                    if (std::isdigit(c)) {
+                        estado = 12; // S12: Primer dígito del día leído
+                        lexema += c;
+                    } else {
+                        return {lexema, TokenType::ERROR_LEXICO, tokenLinea, tokenColumna};
+                    }
+                    break;
+
+                case 12: // S12: Esperamos segundo dígito del día -> ¡FIN DE LA FECHA!
+                    if (std::isdigit(c)) {
+                        lexema += c;
+                        posicion++; 
+                        columna++; // Consumimos este último dígito manualmente
+                        return {lexema, TokenType::FECHA, tokenLinea, tokenColumna};
+                    } else {
+                        return {lexema, TokenType::ERROR_LEXICO, tokenLinea, tokenColumna};
+                    }
+                    break;
+
+                // --- RUTA DE LA HORA ---
+                case 7: // S7: Leímos ':', esperamos el primer dígito de los minutos
+                    if (std::isdigit(c)) {
+                        estado = 9; // S9: Primer dígito de minutos leído
+                        lexema += c;
+                    } else {
+                        return {lexema, TokenType::ERROR_LEXICO, tokenLinea, tokenColumna};
+                    }
+                    break;
+
+                case 9: // S9: Esperamos segundo dígito de los minutos -> ¡FIN DE LA HORA!
+                    if (std::isdigit(c)) {
+                        lexema += c;
+                        posicion++; 
+                        columna++; // Consumimos este último dígito manualmente
+                        return {lexema, TokenType::HORA, tokenLinea, tokenColumna};
+                    } else {
+                        return {lexema, TokenType::ERROR_LEXICO, tokenLinea, tokenColumna};
+                    }
+                    break;
+
+                // --- RUTA DE CADENAS DE TEXTO (Comillas Dobles) ---
+                case 13: // Estado S1 para literales de texto (inició con '"' en S0)
+                    if (c == '"') {
+                        lexema += c;
+                        posicion++; 
+                        columna++; // Consumimos la comilla de cierre
+                        return {lexema, TokenType::CADENA, tokenLinea, tokenColumna};
+                    } else if (c == '\n') {
+                        // Manejo de error crítico requerido por el proyecto: cadena sin cerrar al salto de línea [cite: 160]
+                        return {lexema, TokenType::ERROR_LEXICO, tokenLinea, tokenColumna}; 
+                    } else {
+                        // Consumimos cualquier otro carácter (letras, espacios, números) dentro de la cadena
+                        lexema += c;
+                    }
+                    break;   
             }
             
             posicion++;
