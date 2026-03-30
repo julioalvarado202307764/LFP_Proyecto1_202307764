@@ -102,6 +102,41 @@ private:
         // Si llega aquí, es una palabra que no pertenece al lenguaje
         return TokenType::ERROR_LEXICO;
     }
+    TokenType clasificarCadena(const std::string& lexema) {
+        // Quitamos las comillas para evaluar el contenido limpio
+        // Ej: pasamos de '"AB+"' a 'AB+'
+        std::string contenido = lexema.substr(1, lexema.length() - 2);
+
+        // 1. Validar Tipo de Sangre Restringido
+        if (contenido == "A+" || contenido == "A-" || contenido == "B+" || 
+            contenido == "B-" || contenido == "O+" || contenido == "O-" || 
+            contenido == "AB+" || contenido == "AB-") {
+            return TokenType::TIPO_SANGRE;
+        }
+
+        // 2. Validar Código ID (Formato: 3 letras + guión + dígitos)
+        // Buscamos si tiene un guion en la posición 3 (índice 3 base cero)
+        if (contenido.length() >= 5 && contenido[3] == '-') {
+            bool letrasValidas = std::isalpha(contenido[0]) && 
+                                 std::isalpha(contenido[1]) && 
+                                 std::isalpha(contenido[2]);
+            
+            bool numerosValidos = true;
+            for (size_t i = 4; i < contenido.length(); i++) {
+                if (!std::isdigit(contenido[i])) {
+                    numerosValidos = false;
+                    break;
+                }
+            }
+
+            if (letrasValidas && numerosValidos) {
+                return TokenType::ID_CODIGO;
+            }
+        }
+
+        // 3. Si no es ni sangre ni código, es una cadena de texto normal
+        return TokenType::CADENA;
+    }
 
 public:
     // Constructor
@@ -328,25 +363,23 @@ public:
                 break;
 
             // --- RUTA DE CADENAS DE TEXTO (Comillas Dobles) ---
-            case 13: // Estado S1 para literales de texto (inició con '"' en S0)
-                if (c == '"')
-                {
-                    lexema += c;
-                    posicion++;
-                    columna++; // Consumimos la comilla de cierre
-                    return {lexema, TokenType::CADENA, tokenLinea, tokenColumna};
-                }
-                else if (c == '\n')
-                {
-                    // Manejo de error crítico requerido por el proyecto: cadena sin cerrar al salto de línea [cite: 160]
-                    return {lexema, TokenType::ERROR_LEXICO, tokenLinea, tokenColumna};
-                }
-                else
-                {
-                    // Consumimos cualquier otro carácter (letras, espacios, números) dentro de la cadena
-                    lexema += c;
-                }
-                break;
+           case 13: // Estado para literales de texto
+                    if (c == '"') {
+                        lexema += c; // Agregamos la comilla final
+                        posicion++; 
+                        columna++; 
+                        
+                        // ¡Aquí hacemos la clasificación final!
+                        TokenType tipo = clasificarCadena(lexema);
+                        
+                        return {lexema, tipo, tokenLinea, tokenColumna};
+                        
+                    } else if (c == '\n') {
+                        return {lexema, TokenType::ERROR_LEXICO, tokenLinea, tokenColumna}; 
+                    } else {
+                        lexema += c;
+                    }
+                    break;
             }
 
             posicion++;
