@@ -361,19 +361,27 @@ Token LexicalAnalyzer::nextToken()
                 lexema += c;
             }
             break;
-        case 14: // Nuestro estado personalizado para capturar palabras
-            // Aceptamos letras, números y guion bajo (vital para "tipo_sangre" o "CADA_8_HORAS")
+        case 14:
             if (std::isalnum(c) || c == '_')
             {
                 lexema += c;
             }
             else
             {
-                // Si leemos un espacio, salto de línea o símbolo (como '{' o ':'), la palabra terminó.
-                // OJO: NO avanzamos 'posicion' ni 'columna' aquí.
-                // Ese carácter extra que leímos le pertenece al siguiente token.
-
                 TokenType tipo = clasificarPalabra(lexema);
+
+                // ¡NUEVO! Registramos el error si la palabra no es reconocida
+                if (tipo == TokenType::ERROR_LEXICO)
+                {
+                    errorManager.agregarError(
+                        lexema,
+                        "Palabra no reconocida",
+                        "El token no pertenece a las palabras reservadas ni enumeraciones del lenguaje.",
+                        tokenLinea,
+                        tokenColumna,
+                        "ERROR");
+                }
+
                 return {lexema, tipo, tokenLinea, tokenColumna};
             }
             break;

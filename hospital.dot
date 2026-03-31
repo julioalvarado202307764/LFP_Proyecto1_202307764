@@ -1,0 +1,28 @@
+digraph Hospital {
+  rankdir=TB; node [shape=box, style=filled, fontname="Arial"];
+
+  H [label="Hospital General San Carlos", fillcolor="#1A4731", fontcolor=white, shape=ellipse];
+  P [label="PACIENTES", fillcolor="#2E7D52", fontcolor=white];
+  M [label="MEDICOS", fillcolor="#2E7D52", fontcolor=white];
+  C [label="CITAS", fillcolor="#2E7D52", fontcolor=white];
+  D [label="DIAGNOSTICOS", fillcolor="#2E7D52", fontcolor=white];
+
+  H -> P; H -> M; H -> C; H -> D;
+
+  Maria_Garcia [label="Maria Garcia\nSangre: A+", fillcolor="#D4EDDA"];
+  P -> Maria_Garcia;
+  Pedro_Castillo [label="Pedro Castillo\nSangre: AB-", fillcolor="#D4EDDA"];
+  P -> Pedro_Castillo;
+  Sofia_Ramirez [label="Sofia Ramirez\nSangre: B+", fillcolor="#D4EDDA"];
+  P -> Sofia_Ramirez;
+
+  Dr_Luis_Herrera [label="Dr. Luis Herrera\nMED-003 | PEDIATRIA", fillcolor="#D6EAF8"];
+  M -> Dr_Luis_Herrera;
+  Dr_Roberto_Juarez [label="Dr. Roberto Juarez\nMED-001 | CARDIOLOGIA", fillcolor="#D6EAF8"];
+  M -> Dr_Roberto_Juarez;
+
+
+  Maria_Garcia -> Dr_Roberto_Juarez [label="2025-04-10\n09:00", color="#E67E22", style=dashed];
+  Pedro_Castillo -> Dr_Roberto_Juarez [label="2025-04-10\n09:00", color="#E67E22", style=dashed];
+  Sofia_Ramirez -> Dr_Luis_Herrera [label="2026-04-11\n08:00", color="#E67E22", style=dashed];
+}

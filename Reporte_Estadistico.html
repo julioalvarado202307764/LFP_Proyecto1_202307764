@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Estadístico General del Hospital</title>
+<style>
+body { font-family: Arial, sans-serif; background-color: #f4f7f6; margin: 20px; }
+h1 { color: #2c3e50; text-align: center; }
+table { width: 100%; border-collapse: collapse; margin-top: 20px; background-color: #fff; }
+th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+th { background-color: #34495e; color: white; }
+tr:nth-child(even) { background-color: #f2f2f2; }
+.error { color: #e74c3c; font-weight: bold; }
+</style>
+</head>
+<body>
+<h1>Estadístico General del Hospital</h1>
+<h2>Sección A - Indicadores Clave</h2>
+<table>
+<tr><th>Indicador</th><th>Valor</th></tr>
+<tr><td>Nombre del hospital</td><td>Hospital General San Carlos</td></tr>
+<tr><td>Total de pacientes registrados</td><td>3</td></tr>
+<tr><td>Total de médicos activos</td><td>2</td></tr>
+<tr><td>Total de citas programadas</td><td>3</td></tr>
+<tr><td>Citas con conflicto de horario</td><td style='color:red; font-weight:bold;'>1</td></tr>
+<tr><td>Pacientes con diagnóstico activo</td><td>0 de 3 (0%)</td></tr>
+<tr><td>Medicamento más prescrito</td><td>Ninguno (0 pacientes)</td></tr>
+<tr><td>Especialidad con mayor carga</td><td>CARDIOLOGIA (2 citas)</td></tr>
+<tr><td>Promedio de edad</td><td>48.3 años</td></tr>
+</table>
+<h2>Sección B - Distribución de Carga</h2>
+<table>
+<tr><th>Especialidad</th><th>Médicos</th><th>Citas</th><th>Pacientes</th><th>Ocupación</th></tr>
+<tr>
+<td>CARDIOLOGIA</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>
+  <div style='width: 100%; background-color: #e0e0e0; border-radius: 4px;'>
+    <div style='width: 66%; background-color: #3498db; color: white; text-align: center; border-radius: 4px; font-size: 12px; padding: 2px 0;'>
+      66%
+    </div>
+  </div>
+</td>
+</tr>
+<tr>
+<td>PEDIATRIA</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>
+  <div style='width: 100%; background-color: #e0e0e0; border-radius: 4px;'>
+    <div style='width: 33%; background-color: #3498db; color: white; text-align: center; border-radius: 4px; font-size: 12px; padding: 2px 0;'>
+      33%
+    </div>
+  </div>
+</td>
+</tr>
+</table>
+</body>
+</html>
