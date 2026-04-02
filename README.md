@@ -22,19 +22,16 @@ Sigue estos comandos desde una terminal (PowerShell o CMD) situada en la raíz d
 1. **Limpiar configuraciones previas (Opcional):**
    ```powershell
    Remove-Item -Recurse -Force build
-Configurar el proyecto con CMake:
-Es vital especificar el generador de MinGW para evitar conflictos con otros compiladores:
-
-Bash
-cmake -G "MinGW Makefiles" -B build
-Compilar el binario:
-
-Bash
-cmake --build build
-Ejecutar la aplicación:
-
-Bash
-.\build\MedLexer.exe
+2. **Configurar el proyecto con CMake:**
+   Es vital especificar el generador de MinGW para evitar conflictos con otros compiladores:
+   ```powershell
+   cmake -G "MinGW Makefiles" -B build
+3. **Compilar el binario:**
+   ```powershell
+   cmake --build build
+4. **Ejecutar la aplicación:**
+   ```powershell
+   .\build\MedLexer.exe
  Guía de Uso
 Carga de datos: Puedes escribir directamente en el editor principal o pegar el contenido de un archivo .med.
 
