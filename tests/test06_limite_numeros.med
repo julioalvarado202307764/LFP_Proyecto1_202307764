@@ -1,0 +1,3 @@
+HOSPITAL 
+PACIENTES { paciente: "Bebé" [edad: 0, tipo_sangre: "A+"] }
+CITAS { cita: "X" con "Y" [fecha: 2026-12-31, hora: 23:59] }

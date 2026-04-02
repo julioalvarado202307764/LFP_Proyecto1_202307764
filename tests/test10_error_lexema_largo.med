@@ -1,0 +1,4 @@
+HOSPITAL 
+PACIENTES {
+   paciente: "UnNombreExtremadamenteLargoQueDeberiaSerUnSoloToken" [edad: 99]
+}

@@ -1,0 +1,7 @@
+MEDICOS {
+   medico: "A" [especialidad: CARDIOLOGIA, codigo: "1"]
+   medico: "B" [especialidad: NEUROLOGIA, codigo: "2"]
+   medico: "C" [especialidad: PEDIATRIA, codigo: "3"]
+   medico: "D" [especialidad: MEDICINA_INTERNA, codigo: "4"]
+   medico: "E" [especialidad: CIRUGIA, codigo: "5"]
+}

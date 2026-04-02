@@ -1,0 +1,6 @@
+HOSPITAL 
+
+
+    PACIENTES      {      
+   paciente:           "Espaciado"        [edad: 50] 
+}

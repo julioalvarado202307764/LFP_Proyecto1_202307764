@@ -1,0 +1,4 @@
+HOSPITAL 
+@ # Error: Caracteres no permitidos
+$ %
+PACIENTES { }

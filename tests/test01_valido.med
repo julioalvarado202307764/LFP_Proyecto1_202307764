@@ -1,0 +1,5 @@
+HOSPITAL 
+PACIENTES { paciente: "Test" [edad: 1, tipo_sangre: "O-"] }
+MEDICOS { medico: "Doc" [especialidad: CARDIOLOGIA, codigo: "0"] }
+CITAS { }
+DIAGNOSTICOS { }
