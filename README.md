@@ -32,19 +32,18 @@ Sigue estos comandos desde una terminal (PowerShell o CMD) situada en la raíz d
 4. **Ejecutar la aplicación:**
    ```powershell
    .\build\MedLexer.exe
- Guía de Uso
-Carga de datos: Puedes escribir directamente en el editor principal o pegar el contenido de un archivo .med.
+##  Guía de Uso
 
-Análisis: Presiona el botón "Analizar Código". El sistema procesará el texto, llenando automáticamente las tablas de Tokens y Errores.
+1. **Carga de datos:** Puedes escribir directamente en el editor principal o pegar el contenido de un archivo `.med`.
+2. **Análisis:** Presiona el botón **"Analizar Código"**. El sistema procesará el texto, llenando automáticamente las tablas de Tokens y Errores.
+3. **Gestión de Errores Léxicos:** Si el sistema detecta símbolos ajenos al lenguaje (como `@`, `$`, `&`), no detendrá la ejecución. Los registrará en la tabla de Errores con su respectiva línea y columna para su fácil corrección.
+4. **Visualización de Reportes:** Haz clic en **"Abrir Reportes"** para ver en tu navegador web los documentos HTML generados (listado de pacientes, carga de médicos, agenda de citas y gráficas estadísticas), además del diagrama de red del hospital.
 
-Gestión de Errores Léxicos: Si el sistema detecta símbolos ajenos al lenguaje (como @, $, &), no detendrá la ejecución. Los registrará en la tabla de Errores con su respectiva línea y columna para su fácil corrección.
+##  Estructura del Lenguaje (.med)
 
-Visualización de Reportes: Haz clic en "Abrir Reportes" para ver en tu navegador web los documentos HTML generados (listado de pacientes, carga de médicos, agenda de citas y gráficas estadísticas), además del diagrama de red del hospital.
+El analizador procesa bloques bajo la estructura jerárquica obligatoria de `HOSPITAL`. A continuación un ejemplo válido:
 
- Estructura del Lenguaje (.med)
-El analizador procesa bloques bajo la estructura jerárquica obligatoria de HOSPITAL. A continuación un ejemplo válido:
-
-Plaintext
+```text
 HOSPITAL {
    PACIENTES {
       paciente: "Ana Lopez" [edad: 34, tipo_sangre: "O+"]
@@ -59,6 +58,7 @@ HOSPITAL {
       diagnostico: "Ana Lopez" [condicion: "Hipertension", medicamento: "Losartan", dosis: DIARIA]
    }
 }
+```
  Detalles Técnicos y Arquitectura
 Análisis Léxico: Basado en el Método del Árbol y Tabla de Transiciones (FollowPos) para la construcción de un AFD robusto y sin ambigüedades.
 
