@@ -9,20 +9,15 @@ digraph Hospital {
 
   H -> P; H -> M; H -> C; H -> D;
 
-  Maria_Garcia [label="Maria Garcia\nSangre: A+", fillcolor="#D4EDDA"];
-  P -> Maria_Garcia;
-  Pedro_Castillo [label="Pedro Castillo\nSangre: AB-", fillcolor="#D4EDDA"];
-  P -> Pedro_Castillo;
-  Sofia_Ramirez [label="Sofia Ramirez\nSangre: B+", fillcolor="#D4EDDA"];
-  P -> Sofia_Ramirez;
+  Ana_Lopez [label="Ana Lopez\nSangre: A-", fillcolor="#D4EDDA"];
+  P -> Ana_Lopez;
 
-  Dr_Luis_Herrera [label="Dr. Luis Herrera\nMED-003 | PEDIATRIA", fillcolor="#D6EAF8"];
-  M -> Dr_Luis_Herrera;
-  Dr_Roberto_Juarez [label="Dr. Roberto Juarez\nMED-001 | CARDIOLOGIA", fillcolor="#D6EAF8"];
-  M -> Dr_Roberto_Juarez;
+  Dra_Grey [label="Dra. Grey\nMED-002 | CIRUGIA", fillcolor="#D6EAF8"];
+  M -> Dra_Grey;
 
+  diag_1 [label="Apendicitis\nIbuprofeno / DIARIA", fillcolor="#FDEBD0"];
+  D -> diag_1;
+  diag_1 -> Ana_Lopez [label="diagnóstico activo", color="#C0392B"];
 
-  Maria_Garcia -> Dr_Roberto_Juarez [label="2025-04-10\n09:00", color="#E67E22", style=dashed];
-  Pedro_Castillo -> Dr_Roberto_Juarez [label="2025-04-10\n09:00", color="#E67E22", style=dashed];
-  Sofia_Ramirez -> Dr_Luis_Herrera [label="2026-04-11\n08:00", color="#E67E22", style=dashed];
+  Ana_Lopez ->  [label="-\n-", color="#E67E22", style=dashed];
 }

@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <iomanip>
 #include <sstream>
+#include <cstdlib>
 
 ReportGenerator::ReportGenerator(const std::vector<Token>& tokens, const std::vector<ErrorLexico>& errores)
     : listaTokens(tokens), listaErrores(errores) {}
@@ -341,8 +342,10 @@ void ReportGenerator::generarReporteCitas() {
                 }
                 j++;
             }
-            
-            listaCitas.push_back(nuevaCita);
+            // Solo agregar la cita si realmente extrajo al paciente y al médico
+            if (!nuevaCita.paciente.empty() && !nuevaCita.medico.empty()) {
+                listaCitas.push_back(nuevaCita);
+            }
         }
     }
 
@@ -742,5 +745,16 @@ void ReportGenerator::generarGraphviz() {
 
     archivo << "}\n";
     archivo.close();
+    std::cout << "Diagrama Graphviz generado con exito: hospital.dot\n";
+
+    // --- MAGIA AUTOMÁTICA: Generar el PNG ---
+    std::cout << "Generando imagen PNG...\n";
+    int resultado = std::system("dot -Tpng hospital.dot -o hospital.png");
+    
+    if (resultado == 0) {
+        std::cout << "Imagen PNG generada con exito: hospital.png\n";
+    } else {
+        std::cout << "Error al generar PNG. Verifica que Graphviz (dot) este en las variables de entorno.\n";
+    }
     std::cout << "Diagrama Graphviz generado con exito: hospital.dot\n";
 }

@@ -18,7 +18,6 @@ TokenType LexicalAnalyzer::clasificarPalabra(const std::string &palabra)
         return TokenType::CITAS;
     if (palabra == "DIAGNOSTICOS")
         return TokenType::DIAGNOSTICOS;
-
     // Elementos y conectores
     if (palabra == "paciente")
         return TokenType::PACIENTE_ELEM;
@@ -42,14 +41,15 @@ TokenType LexicalAnalyzer::clasificarPalabra(const std::string &palabra)
 
     // Enumeraciones - Especialidades
     if (palabra == "CARDIOLOGIA" || palabra == "NEUROLOGIA" || palabra == "PEDIATRIA" ||
-        palabra == "CIRUGIA" || palabra == "MEDICINA_GENERAL" || palabra == "ONCOLOGIA")
+        palabra == "CIRUGIA" || palabra == "MEDICINA_INTERNA" || palabra == "MEDICINA_GENERAL" || 
+        palabra == "ONCOLOGIA")
     {
         return TokenType::ESPECIALIDAD;
     }
 
     // Enumeraciones - Dosis
     if (palabra == "DIARIA" || palabra == "CADA_8_HORAS" ||
-        palabra == "CADA_12_HORAS" || palabra == "SEMANAL")
+        palabra == "CADA_12_HORAS" || palabra == "SEMANAL" || palabra == "PRN")
     {
         return TokenType::DOSIS;
     }
@@ -152,12 +152,33 @@ Token LexicalAnalyzer::nextToken()
                 lexema += c;
             }
             else
-            {
-                // Columna 'S' u otros: Símbolos sueltos ({, }, [, ], etc.)
-                lexema += c;
-                posicion++;
-                columna++;
-                return {lexema, TokenType::SIMBOLO, tokenLinea, tokenColumna};
+            {// Verificamos explícitamente si es un símbolo válido del lenguaje MedLang
+                if (c == '{' || c == '}' || c == '[' || c == ']' || c == ':' || c == ',') {
+                    lexema += c;
+                    posicion++;
+                    columna++;
+                    return {lexema, TokenType::SIMBOLO, tokenLinea, tokenColumna};
+                } 
+                // Si no es ninguno de los anteriores (ej. '@', '#', '&'), es un ERROR LÉXICO
+                else {
+                    lexema += c; // Guardamos el símbolo raro en el lexema
+                    
+                    // Registramos el error en el gestor
+                    errorManager.agregarError(
+                        lexema, 
+                        "Símbolo no reconocido", 
+                        "El caracter no pertenece al alfabeto del lenguaje.", 
+                        tokenLinea,    
+                        tokenColumna,  
+                        "ERROR"
+                    );
+                    
+                    // Avanzamos los contadores para no quedarnos atrapados en un bucle infinito
+                    posicion++;
+                    columna++;
+                    
+                    return {lexema, TokenType::ERROR_LEXICO, tokenLinea, tokenColumna};
+                }
             }
             break;
 

@@ -1,0 +1,53 @@
+# === Compilación y Binarios ===
+# Ignoramos la carpeta de construcción completa
+build/
+bin/
+obj/
+
+# Ejecutables y librerías (Windows/MinGW)
+*.exe
+*.dll
+*.o
+*.a
+
+# === Archivos de CMake ===
+# Estos se regeneran automáticamente al configurar
+CMakeCache.txt
+CMakeFiles/
+CMakeScripts/
+Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+_deps/
+
+# === Qt (Archivos generados automáticamente) ===
+# Archivos de Meta-Object Compiler, UI Compiler y Resource Compiler
+moc_*.cpp
+moc_*.h
+qrc_*.cpp
+ui_*.h
+*.qmlc
+*.jsc
+debug/
+release/
+
+# === Archivos de VS Code ===
+# Configuraciones locales del editor
+.vscode/
+.history/
+*.log
+*.pstat
+
+# === Graphviz y Salidas del Programa ===
+# Ignoramos los archivos que genera tu código para no ensuciar el historial de Git
+*.dot
+*.png
+reporte_*.html
+
+# === Otros temporales del sistema ===
+.DS_Store
+Thumbs.db
+*~
+*.swp
