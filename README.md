@@ -59,11 +59,13 @@ HOSPITAL {
    }
 }
 ```
- Detalles Técnicos y Arquitectura
-Análisis Léxico: Basado en el Método del Árbol y Tabla de Transiciones (FollowPos) para la construcción de un AFD robusto y sin ambigüedades.
+ ##Detalles Técnicos y Arquitectura
+* **Análisis Léxico:** Basado en el Método del Árbol y Tabla de Transiciones (FollowPos) para la construcción de un AFD robusto y sin ambigüedades.
 
-Separación de Responsabilidades: Lógica de tokenización (LexicalAnalyzer), gestión de recuperación (ErrorManager), generación de salidas (ReportGenerator) e Interfaz Gráfica (MainWindow) separadas bajo principios de diseño limpio en C++ puro.
+* **Separación de Responsabilidades:** Lógica de tokenización (LexicalAnalyzer), gestión de recuperación (ErrorManager), generación de salidas (ReportGenerator) e Interfaz Gráfica (MainWindow) separadas bajo principios de diseño limpio en C++ puro.
 
-Manejo de Memoria: Uso eficiente de contenedores STL (std::vector) y manejo seguro de punteros en la jerarquía de objetos de Qt.
+* **Manejo de Memoria:** Uso eficiente de contenedores STL (std::vector) y manejo seguro de punteros en la jerarquía de objetos de Qt.
+
+---
 
 Desarrollado para el curso de Lenguajes Formales y de Programación - 2026.
