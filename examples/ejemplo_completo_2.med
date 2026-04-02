@@ -1,0 +1,18 @@
+HOSPITAL 
+
+PACIENTES { 
+   paciente: "Elena Gomez" [edad: 12, tipo_sangre: "B+"] 
+} 
+
+MEDICOS { 
+   medico: "Dr. Paz" [especialidad: PEDIATRIA, codigo: "MED-201"] 
+   medico: "Dra. Rios" [especialidad: CIRUGIA, codigo: "MED-202"] 
+} 
+
+CITAS { 
+   cita: "Elena Gomez" con "Dr. Paz" [fecha: 2026-05-20, hora: 14:00] 
+} 
+
+DIAGNOSTICOS { 
+   diagnostico: "Elena Gomez" [condicion: "Alergia", medicamento: "Loratadina", dosis: PRN] 
+}

@@ -1,0 +1,20 @@
+HOSPITAL 
+
+PACIENTES { 
+   paciente: "Carlos Ruiz" [edad: 28, tipo_sangre: "O+"] 
+   paciente: "Maria Garcia" [edad: 45, tipo_sangre: "A-"] 
+} 
+
+MEDICOS { 
+   medico: "Dr. Arzu" [especialidad: CARDIOLOGIA, codigo: "MED-101"] 
+   medico: "Dra. Mendez" [especialidad: NEUROLOGIA, codigo: "MED-102"] 
+} 
+
+CITAS { 
+   cita: "Carlos Ruiz" con "Dr. Arzu" [fecha: 2026-04-15, hora: 09:00] 
+   cita: "Maria Garcia" con "Dra. Mendez" [fecha: 2026-04-15, hora: 10:30] 
+} 
+
+DIAGNOSTICOS { 
+   diagnostico: "Carlos Ruiz" [condicion: "Arritmia", medicamento: "Digoxina", dosis: DIARIA] 
+}
