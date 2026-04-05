@@ -9,15 +9,57 @@ digraph Hospital {
 
   H -> P; H -> M; H -> C; H -> D;
 
-  Ana_Lopez [label="Ana Lopez\nSangre: A-", fillcolor="#D4EDDA"];
-  P -> Ana_Lopez;
+  Hugo_Activo [label="Hugo Activo\nSangre: A+", fillcolor="#D4EDDA"];
+  P -> Hugo_Activo;
+  Luis_Critico [label="Luis Critico\nSangre: AB+", fillcolor="#D4EDDA"];
+  P -> Luis_Critico;
+  Paco_Sindiag [label="Paco Sindiag\nSangre: O-", fillcolor="#D4EDDA"];
+  P -> Paco_Sindiag;
 
-  Dra_Grey [label="Dra. Grey\nMED-002 | CIRUGIA", fillcolor="#D6EAF8"];
-  M -> Dra_Grey;
+  Dr_Alta [label="Dr. Alta\nMED-003 | NEUROLOGIA", fillcolor="#D6EAF8"];
+  M -> Dr_Alta;
+  Dr_Baja [label="Dr. Baja\nMED-001 | PEDIATRIA", fillcolor="#D6EAF8"];
+  M -> Dr_Baja;
+  Dra_Normal [label="Dra. Normal\nMED-002 | CARDIOLOGIA", fillcolor="#D6EAF8"];
+  M -> Dra_Normal;
+  Dra_Saturada [label="Dra. Saturada\nMED-004 | CIRUGIA", fillcolor="#D6EAF8"];
+  M -> Dra_Saturada;
 
-  diag_1 [label="Apendicitis\nIbuprofeno / DIARIA", fillcolor="#FDEBD0"];
+  diag_1 [label="Alergia\nLoratadina / DIARIA", fillcolor="#FDEBD0"];
   D -> diag_1;
-  diag_1 -> Ana_Lopez [label="diagnóstico activo", color="#C0392B"];
+  diag_1 ->  [label="diagnóstico activo", color="#C0392B"];
+  diag_2 [label="Alergia\nLoratadina / DIARIA", fillcolor="#FDEBD0"];
+  D -> diag_2;
+  diag_2 -> Hugo_Activo [label="diagnóstico activo", color="#C0392B"];
+  diag_3 [label="Asma\nLoratadina / CADA_12_HORAS", fillcolor="#FDEBD0"];
+  D -> diag_3;
+  diag_3 -> Luis_Critico [label="diagnóstico activo", color="#C0392B"];
+  diag_4 [label="Gastritis\nOmeprazol / CADA_8_HORAS", fillcolor="#FDEBD0"];
+  D -> diag_4;
+  diag_4 -> Luis_Critico [label="diagnóstico activo", color="#C0392B"];
 
-  Ana_Lopez ->  [label="-\n-", color="#E67E22", style=dashed];
+  Hugo_Activo -> Dr_Baja [label="2026-03-10\n09:00", color="#E67E22", style=dashed];
+  Paco_Sindiag -> Dr_Baja [label="2026-03-10\n09:00", color="#E67E22", style=dashed];
+  Luis_Critico -> Dra_Normal [label="2026-05-01\n08:00", color="#E67E22", style=dashed];
+  Hugo_Activo -> Dra_Normal [label="2026-05-02\n09:00", color="#E67E22", style=dashed];
+  Paco_Sindiag -> Dra_Normal [label="2026-05-03\n10:00", color="#E67E22", style=dashed];
+  Luis_Critico -> Dra_Normal [label="2026-05-04\n11:00", color="#E67E22", style=dashed];
+  Hugo_Activo -> Dra_Normal [label="2026-05-05\n12:00", color="#E67E22", style=dashed];
+  Hugo_Activo -> Dr_Alta [label="2026-03-01\n08:00", color="#E67E22", style=dashed];
+  Paco_Sindiag -> Dr_Alta [label="2026-03-02\n09:00", color="#E67E22", style=dashed];
+  Luis_Critico -> Dr_Alta [label="2026-03-03\n10:00", color="#E67E22", style=dashed];
+  Hugo_Activo -> Dr_Alta [label="2026-03-04\n11:00", color="#E67E22", style=dashed];
+  Paco_Sindiag -> Dr_Alta [label="2026-03-05\n12:00", color="#E67E22", style=dashed];
+  Luis_Critico -> Dr_Alta [label="2026-03-06\n13:00", color="#E67E22", style=dashed];
+  Hugo_Activo -> Dr_Alta [label="2026-03-07\n14:00", color="#E67E22", style=dashed];
+  Paco_Sindiag -> Dra_Saturada [label="2026-03-11\n07:00", color="#E67E22", style=dashed];
+  Luis_Critico -> Dra_Saturada [label="2026-03-12\n08:00", color="#E67E22", style=dashed];
+  Hugo_Activo -> Dra_Saturada [label="2026-03-13\n09:00", color="#E67E22", style=dashed];
+  Paco_Sindiag -> Dra_Saturada [label="2026-03-14\n10:00", color="#E67E22", style=dashed];
+  Luis_Critico -> Dra_Saturada [label="2026-03-15\n11:00", color="#E67E22", style=dashed];
+  Hugo_Activo -> Dra_Saturada [label="2026-03-16\n12:00", color="#E67E22", style=dashed];
+  Paco_Sindiag -> Dra_Saturada [label="2026-03-17\n13:00", color="#E67E22", style=dashed];
+  Luis_Critico -> Dra_Saturada [label="2026-03-18\n14:00", color="#E67E22", style=dashed];
+  Hugo_Activo -> Dra_Saturada [label="2026-03-19\n15:00", color="#E67E22", style=dashed];
+  Paco_Sindiag -> Dra_Saturada [label="2026-03-20\n16:00", color="#E67E22", style=dashed];
 }
